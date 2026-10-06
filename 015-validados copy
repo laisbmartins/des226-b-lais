@@ -1,0 +1,39 @@
+const readline = require("readline");
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
+function Validacao(idade, acompanhado, bloqueado) {
+  if (bloqueado === true) {
+    return "bloqueado";
+  }
+  if (idade >= 18 || (idade >= 16 && acompanhado === true)) {
+    return "acesso liberado";
+  } else {
+    return "acesso negado";
+  }
+}
+rl.question("qual a idade?", function (idadeInput) {
+  let entradaIdade = parseInt(idadeInput);
+
+  rl.question("esta acompanhado? (sim/nao)", function (acompanhadoInput) {
+    let respostaAcompanhado = acompanhadoInput.toLowerCase().trim();
+    let estaAcompanhado =
+      respostaAcompanhado === "sim" || respostaAcompanhado === "s";
+
+    rl.question(
+      "A pessoa esta bloqueada? (sim/nao)",
+      function (bloqueadoInput) {
+        let respostaBloqueado = bloqueadoInput.toLowerCase().trim();
+        let estaBloqueado =
+          respostaBloqueado === "sim" || respostaBloqueado === "s";
+
+        let resultado = Validacao(entradaIdade, estaAcompanhado, estaBloqueado);
+
+        console.log("\nresultado da verificação: " + resultado);
+        rl.close();
+      },
+    );
+  });
+});
