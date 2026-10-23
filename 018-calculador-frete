@@ -1,0 +1,22 @@
+const readline = require("readline");
+
+const teclado = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
+
+teclado.question("Digite o valor da compra: R$ ", function (valorCompra) {
+  valorCompra = Number(valorCompra);
+
+  let valorFrete = valorCompra > 150 ? 0 : 20;
+
+  let totalPagar = valorCompra + valorFrete;
+
+  console.log("\n===== RESUMO DA COMPRA =====");
+  console.log("Valor da compra: R$ " + valorCompra.toFixed(2));
+  console.log("Valor do frete: R$ " + valorFrete.toFixed(2));
+  console.log("Total a pagar: R$ " + totalPagar.toFixed(2));
+  console.log("============================");
+
+  teclado.close();
+});
